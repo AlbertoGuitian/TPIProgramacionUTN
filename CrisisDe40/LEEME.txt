@@ -1,0 +1,20 @@
+CRISIS DE LOS 40 - Programacion I - TPI
+
+ARCHIVOS Y RESPONSABLES
+-----------------------
+Juntos      contrato.h                 Constantes, codigos de carta y funciones de ayuda
+Desarrollo A  mazo.h / mazo.cpp          Mazo, puntaje de una fila, victoria, estadisticas
+Desarrollo B  tablero.h / tablero.cpp    Tablero (vector de 15) y jugadas
+Desarrollo C  pantallas.h / pantallas.cpp  Menu, pantallas y lectura del teclado
+Desarrollo C  partida.h / partida.cpp    Flujo de la partida y del turno
+Desarrollo C  main.cpp                   Programa principal y menu
+
+REGLAS DE EQUIPO
+----------------
+- Cada uno modifica solo sus archivos.
+- Los .h (firmas) no se cambian sin avisar: son el contrato entre los tres.
+- Solo el modulo de C imprime y lee del teclado.
+- Los TODO marcan lo pendiente de cada modulo.
+- El proyecto compila tal como esta; las funciones vacias devuelven valores provisorios.
+- Si el .cbp no abre: crear un proyecto "Console application" C++ en Code::Blocks
+  y agregar todos los .h y .cpp con Project > Add files.
