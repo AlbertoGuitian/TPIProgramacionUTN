@@ -76,6 +76,12 @@ bool hayCarta(const vector<int>& tablero, int fila, int col)
 bool colocarCarta(vector<int>& tablero, int carta, int fila)
 {
     // TODO (B): colocar en un casillero libre de la fila; false si no hay lugar
+    for (int i=1; i<=COLUMNAS; i++){//hay q tener cuidado con la inicializacion del i porque si es 0, no es valor valido de la posicion del  vector
+        if(tablero[posicion(fila,i)] == VACIO){
+            tablero[posicion(fila,i)]= carta;
+        return true;
+        }
+    }
     return false;
 }
 

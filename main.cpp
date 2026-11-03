@@ -1,52 +1,39 @@
+// DESARROLLADOR C - Programa principal y menu
 #include <iostream>
-#include "rlutil.h"
-#include "menu.h"
-#include <cstdlib> ///srand() y rand()
-#include <ctime>  ///time()
-
+#include <cstdlib>
+#include <ctime>
+#include "contrato.h"
+#include "pantallas.h"
+#include "partida.h"
 using namespace std;
+
 int main()
-
 {
-srand(time(0));
-int opcion;
+    srand(time(NULL));          // una sola vez en todo el programa
 
+    string mejorNombre = "";    // estadisticas: solo en memoria
+    int mejorPuntaje = 0;
+    int opcion;
 
-do{
+    do
+    {
+        limpiarPantalla();
+        mostrarMenu();
+        opcion = leerEntero(0, 3);
 
-dibujarLineaCopada(); cout << endl<< endl;
-cout << "     CRISIS DE LOS 40       "<< endl<< endl;
-dibujarLineaCopada(); cout << endl<< endl;
-
- cout << " OPCION 1 " << endl;
- cout << " OPCION 2 " << endl;
- cout << " OPCION 3 " << endl;
- cout << "----------" << std::endl;
- cout << "   SALIR  " << endl<< endl;
- cout << "Opcion: " ;
- cin >> opcion;
-
-switch (opcion) {
-           /// jugarPartida(); seria la funcion para jugar la partida -
-            case 1:
-                jugar();
-                break;
-            case 2:///    mostrarEstadisticas(); mostrar
-
-                break;
-            case 3: ///    mostrarReglas();
-
-                break;
-            case 0:
-                cout << "Gracias por jugar a Crisis de los 40! Hasta luego." << endl;
-                break;
-            default:
-                cout << "Opcion invalida. Por favor, elija una opcion correcta."<< endl;
-
-}
-
+        if (opcion == 1)
+        {
+            jugarPartida(mejorNombre, mejorPuntaje);
+        }
+        else if (opcion == 2)
+        {
+            mostrarEstadisticas(mejorNombre, mejorPuntaje);
+        }
+        else if (opcion == 3)
+        {
+            mostrarReglas();
+        }
     } while (opcion != 0);
 
-
- return 0;
-    }
+    return 0;
+}
