@@ -13,7 +13,7 @@ int main()
 
     string mejorNombre = "";    // estadisticas: solo en memoria
     int mejorPuntaje = 0;
-    int opcion;///
+    int opcion;
 
     do
     {
