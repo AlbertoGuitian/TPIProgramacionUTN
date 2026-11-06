@@ -106,5 +106,11 @@ bool moverCarta(vector<int>& tablero, int fOrigen, int cOrigen, int fDestino)
 bool retirarCarta(vector<int>& tablero, vector<int>& mazo, int fila, int col)
 {
     // TODO (B): la carta retirada vuelve al mazo; false si el casillero esta vacio
-    return false;
+    if(tablero[posicion(fila,col)]== VACIO){
+        return false;
+    }
+    mazo.push_back();
+    tablero[posicion(fila,col)])=VACIO;
+    return true;
+
 }
