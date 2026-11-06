@@ -37,6 +37,7 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="contrato.h" />
+		<Unit filename="cppdeprueba.h" />
 		<Unit filename="main.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
