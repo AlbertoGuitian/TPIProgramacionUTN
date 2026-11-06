@@ -108,7 +108,7 @@ bool retirarCarta(vector<int>& tablero, vector<int>& mazo, int fila, int col)
     // TODO (B): la carta retirada vuelve al mazo; false si el casillero esta vacio
     if(tablero[posicion(fila,col)]== VACIO){
         return false;
-    }
+    }//hola como estas kev
     mazo.push_back();
     tablero[posicion(fila,col)])=VACIO;
     return true;
