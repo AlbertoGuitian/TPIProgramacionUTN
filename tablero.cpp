@@ -63,7 +63,7 @@ void vaciarFila(vector<int>& tablero, vector<int>& mazo, int fila)
 {
 // TODO (B): devolver las cartas de la fila al mazo y dejar la fila vacia
 for (int i=1; i<=COLUMNAS; i++){
-    retirarCarta(tablero, mazo,fila,i);
+        retirarCarta(tablero, mazo,fila,i);
 }
 }
 
@@ -91,19 +91,40 @@ bool colocarCarta(vector<int>& tablero, int carta, int fila)
 bool reemplazarCarta(vector<int>& tablero, vector<int>& mazo, int carta, int fila, int col)
 {
     // TODO (B): la carta reemplazada vuelve al mazo; false si el casillero esta vacio
-    return false;
-}
+    if (retirarCarta(tablero,mazo,fila,col) == false ){
+        return false;
+    }
+    tablero[posicion(fila,col)]= carta;
+        return true;
+    }
 
 bool intercambiarCartas(vector<int>& tablero, int f1, int c1, int f2, int c2)
-{
     // TODO (B): ambos casilleros deben tener carta
-    return false;
+{
+    int auxiliar;
+    if (hayCarta(tablero,f1,c1) == false || hayCarta(tablero,f2,c2) == false){
+        return false;}
+    auxiliar = tablero[posicion(f2,c2)];
+    tablero[posicion(f2,c2)]=tablero[posicion(f1,c1)];
+    tablero[posicion(f1,c1)]=auxiliar;
+    return true;
+
 }
 
+    // TODO (B): mover a un casillero libre de otra fila; false si no se puede
 bool moverCarta(vector<int>& tablero, int fOrigen, int cOrigen, int fDestino)
 {
-    // TODO (B): mover a un casillero libre de otra fila; false si no se puede
-    return false;
+    if (hayCarta(tablero,fOrigen,cOrigen) == false){
+        return false;
+    }
+    if (fDestino == fOrigen){
+        return false;
+    }
+    if(colocarCarta(tablero,tablero[posicion(fOrigen, cOrigen)], fDestino)== false){
+        return false;
+    }
+    tablero[posicion(fOrigen,cOrigen)] = VACIO;
+    return true;
 }
 
 bool retirarCarta(vector<int>& tablero, vector<int>& mazo, int fila, int col)
