@@ -1,9 +1,9 @@
 #include <cstdlib>
 #include <vector>
-#include "datos.h"
+
 
 // ---------- CARTAS Y MAZO ----------
-Carta crearCarta(int valor, Palo palo, bool esComodin) {
+void Carta crearCarta(int valor, Palo palo, bool esComodin) {
     Carta c;
     c.valor = valor;
     c.palo = palo;

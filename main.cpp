@@ -5,6 +5,7 @@
 #include "contrato.h"
 #include "pantallas.h"
 #include "partida.h"
+#include "mazo.h"
 using namespace std;
 
 int main()

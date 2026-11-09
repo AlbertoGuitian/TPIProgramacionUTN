@@ -61,7 +61,10 @@ int filaCompleta(const vector<int>& tablero)
 
 void vaciarFila(vector<int>& tablero, vector<int>& mazo, int fila)
 {
-    // TODO (B): devolver las cartas de la fila al mazo y dejar la fila vacia
+// TODO (B): devolver las cartas de la fila al mazo y dejar la fila vacia
+for (int i=1; i<=COLUMNAS; i++){
+    retirarCarta(tablero, mazo,fila,i);
+}
 }
 
 bool hayCarta(const vector<int>& tablero, int fila, int col)
