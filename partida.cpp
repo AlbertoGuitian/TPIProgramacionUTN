@@ -6,15 +6,16 @@
 
 void jugarPartida(string& mejorNombre, int& mejorPuntaje)
 {
+
     vector<string> nombres(2);
     vector<int> puntajes(2, 0);
     vector<int> mazo;
     vector<int> tablero;
 
-    pedirNombres(nombres);
-    crearMazo(mazo);
-    mezclarMazo(mazo);
-    crearTablero(tablero);
+    //pedirNombres(nombres);
+    //crearMazo(mazo);
+    //mezclarMazo(mazo);
+   // crearTablero(tablero);
 
     int activo = sortearInicio();
     int resultado = -1;

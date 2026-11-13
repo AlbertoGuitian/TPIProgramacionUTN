@@ -45,6 +45,8 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="mazo.h" />
+		<Unit filename="milka.cpp" />
+		<Unit filename="milka.h" />
 		<Unit filename="pantallas.cpp">
 			<Option compilerVar="CC" />
 		</Unit>

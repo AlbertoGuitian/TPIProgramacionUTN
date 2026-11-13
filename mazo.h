@@ -1,14 +1,14 @@
 #pragma once
-#ifndef DATOS_H
-#define DATOS_H
-
+#ifndef MAZO_H
+#define MAZO_H
+#include "contrato.h"
 #include <vector>
 
 // ===================== CONSTANTES =====================
 const int CANT_CARTAS     = 54;  // 52 de poker + 2 comodines
-const int FILAS           = 3;
-const int CASILLEROS      = 5;
-const int PUNTOS_VICTORIA = 50;
+//const int FILAS           = 3;
+
+
 
 // ===================== TIPOS =====================
 enum Palo { PICAS, CORAZONES, TREBOLES, DIAMANTES, SIN_PALO };
@@ -24,7 +24,7 @@ struct Mazo {
 };
 
 struct Tablero {
-    std::vector< std::vector<Carta> > casilleros;  // [FILAS][CASILLEROS]
+    std::vector< std::vector<Carta> > COLUMNAS;  // [FILAS][CASILLEROS]
     std::vector< std::vector<bool> >  ocupado;     // true si el casillero tiene carta
 };
 

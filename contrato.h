@@ -18,6 +18,7 @@ const int CIERRE_EXACTO = 30;   // 30 justo: suma 30 y el rival resta 15
 const int PENALIDAD = 15;
 const int TOTAL_CARTAS = 54;
 const int VACIO = 0;            // casillero vacio en el tablero
+const int PUNTOS_VICTORIA = 50;
 
 // ---------- Resultados posibles de puntuarFila ----------
 const int SIN_PUNTOS = 0;

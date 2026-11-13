@@ -1,6 +1,7 @@
 // DESARROLLADOR B - Tablero y jugadas
 #include "tablero.h"
 
+
 void crearTablero(vector <int>& tablero)
 {
     // TODO (B): dejar el vector con 15 casilleros VACIO
@@ -133,7 +134,7 @@ bool retirarCarta(vector<int>& tablero, vector<int>& mazo, int fila, int col)
     if(tablero[posicion(fila,col)]== VACIO){
         return false;
     }
-    mazo.push_back([posicion(fila,col)];
+    mazo.push_back(tablero[posicion(fila,col)]);
     tablero[posicion(fila,col)]=VACIO;
     return true;
 

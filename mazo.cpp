@@ -1,9 +1,12 @@
 #include <cstdlib>
 #include <vector>
+#include "mazo.h"
+#include "contrato.h"
+
 
 
 // ---------- CARTAS Y MAZO ----------
-void Carta crearCarta(int valor, Palo palo, bool esComodin) {
+Carta crearCarta(int valor, Palo palo, bool esComodin) {
     Carta c;
     c.valor = valor;
     c.palo = palo;
@@ -49,26 +52,26 @@ int cantidadMazo(const Mazo &m) {
 // ---------- TABLERO ----------
 void inicializarTablero(Tablero &t) {
     Carta vacia = crearCarta(0, SIN_PALO, false);
-    t.casilleros = std::vector< std::vector<Carta> >(FILAS, std::vector<Carta>(CASILLEROS, vacia));
-    t.ocupado    = std::vector< std::vector<bool> >(FILAS, std::vector<bool>(CASILLEROS, false));
+    t.COLUMNAS = std::vector< std::vector<Carta> >(FILAS, std::vector<Carta>(COLUMNAS, vacia));
+    t.ocupado    = std::vector< std::vector<bool> >(FILAS, std::vector<bool>(COLUMNAS, false));
 }
 
 int cartasEnFila(const Tablero &t, int fila) {
     int n = 0;
-    for (int c = 0; c < CASILLEROS; c++)
+    for (int c = 0; c < COLUMNAS; c++)
         if (t.ocupado[fila][c]) n++;
     return n;
 }
 
 int sumaFila(const Tablero &t, int fila) {
     int suma = 0;
-    for (int c = 0; c < CASILLEROS; c++)
-        if (t.ocupado[fila][c]) suma += t.casilleros[fila][c].valor;
+    for (int c = 0; c < COLUMNAS; c++)
+        if (t.ocupado[fila][c]) suma += t.COLUMNAS[fila][c].valor;
     return suma;
 }
 
 bool filaCompleta(const Tablero &t, int fila) {
-    return cartasEnFila(t, fila) == CASILLEROS;
+    return cartasEnFila(t, fila) == COLUMNAS;
 }
 
 bool tableroVacio(const Tablero &t) {
@@ -78,9 +81,9 @@ bool tableroVacio(const Tablero &t) {
 }
 
 void vaciarFila(Tablero &t, Mazo &m, int fila) {
-    for (int c = 0; c < CASILLEROS; c++) {
+    for (int c = 0; c < COLUMNAS; c++) {
         if (t.ocupado[fila][c]) {
-            devolverCarta(m, t.casilleros[fila][c]);
+            devolverCarta(m, t.COLUMNAS[fila][c]);
             t.ocupado[fila][c] = false;
         }
     }
