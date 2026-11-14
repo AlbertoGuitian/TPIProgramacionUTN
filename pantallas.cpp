@@ -157,22 +157,9 @@ int sortearInicio()
     cout << endl;
     cout << "PUNTAJES:" << endl;
 
+
     for (int i = 0; i < 2; i++)
     {
-        string nombre = "Jugador";
-
-        if (i < nombres.size())
-        {
-            nombre = nombres[i];
-        }
-
-        int puntos = 0;
-
-        if (i < puntajes.size())
-        {
-            puntos = puntajes[i];
-        }
-
         if (i == activo)
         {
             cout << "> ";
@@ -182,17 +169,11 @@ int sortearInicio()
             cout << "  ";
         }
 
-        cout << nombre << ": " << puntos << " puntos" << endl;
+        cout << nombres[i] << ": " << puntajes[i] << " puntos" << endl;
     }
 
     cout << endl;
     cout << "TABLERO:" << endl;
-
-    if (tablero.size() < FILAS * COLUMNAS)
-    {
-        cout << "Error: el tablero no tiene las 15 posiciones." << endl;
-        return;
-    }
 
     for (int fila = 1; fila <= FILAS; fila++)
     {
