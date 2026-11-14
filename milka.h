@@ -1,6 +1,0 @@
-#ifndef MILKA_H_INCLUDED
-#define MILKA_H_INCLUDED
-
-
-
-#endif // MILKA_H_INCLUDED

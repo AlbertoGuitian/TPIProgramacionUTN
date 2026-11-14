@@ -109,10 +109,8 @@ void mostrarEstadisticas(const string& mejorNombre, int mejorPuntaje)
 
 // TODO (C): pantalla NUEVA PARTIDA: pedir nombre del jugador 1 y del jugador 2
 //Qué hace nombres.resize(2)? Reserva dos posiciones en el vector: una para cada jugador.
-void pedirNombres(vector<string>& nombres)
+void pedirNombres(string nombres[])
 {
-    nombres.resize(2);
-
     cout << "==================================" << endl;
     cout << "          NUEVA PARTIDA" << endl;
     cout << "==================================" << endl;
@@ -124,6 +122,7 @@ void pedirNombres(vector<string>& nombres)
     cout << "Ingrese el nombre del jugador 2: ";
     getline(cin, nombres[1]);
 }
+
 
 // TODO (C): devolver 0 o 1 al azar y mostrar "Sorteo: empieza ..."
 int sortearInicio()
@@ -144,8 +143,8 @@ int sortearInicio()
     return inicio;
 }
 
-    void mostrarEstado(const vector<string>& nombres, const vector<int>& puntajes,
-    const vector<int>& tablero, int cartasMazo, int activo)
+    void mostrarEstado(const string nombres[], const int puntajes[],
+                   const int tablero[], int cartasMazo, int activo)
     // TODO (C): encabezado, puntajes (marcar con > al jugador activo),
     //           tablero con cartas por fila y suma de cada fila
 {

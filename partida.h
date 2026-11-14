@@ -6,8 +6,8 @@
 
 void jugarPartida(string& mejorNombre, int& mejorPuntaje);
 
-void jugarTurno(const vector<string>& nombres, vector<int>& puntajes,
-                vector<int>& tablero, vector<int>& mazo,
+void jugarTurno(const string nombres[], int puntajes[],
+                int tablero[], int mazo[], int& cantMazo,
                 int activo, int c1, int c2);
 
 #endif

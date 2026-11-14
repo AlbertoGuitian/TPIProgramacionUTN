@@ -1,121 +1,86 @@
+// DESARROLLADOR A - Mazo, puntaje y estadisticas
 #include <cstdlib>
-#include <vector>
 #include "mazo.h"
-#include "contrato.h"
 
-
-
-// ---------- CARTAS Y MAZO ----------
-Carta crearCarta(int valor, Palo palo, bool esComodin) {
-    Carta c;
-    c.valor = valor;
-    c.palo = palo;
-    c.esComodin = esComodin;
-    return c;
-}
-
-void inicializarMazo(Mazo &m) {
-    m.cartas.clear();
-    for (int p = 0; p < 4; p++) {
-        for (int v = 1; v <= 13; v++) {
-            m.cartas.push_back(crearCarta(v, (Palo)p, false));
-        }
+void crearMazo(int mazo[], int& cantMazo)
+{
+    cantMazo = 0;
+    for (int carta = 1; carta <= TOTAL_CARTAS; carta++)
+    {
+        mazo[cantMazo] = carta;
+        cantMazo++;
     }
-    m.cartas.push_back(crearCarta(0, SIN_PALO, true));
-    m.cartas.push_back(crearCarta(0, SIN_PALO, true));
 }
 
-void mezclarMazo(Mazo &m) {  // Fisher-Yates
-    for (int i = (int)m.cartas.size() - 1; i > 0; i--) {
+void mezclarMazo(int mazo[], int cantMazo)   // Fisher-Yates
+{
+    for (int i = cantMazo - 1; i > 0; i--)
+    {
         int j = rand() % (i + 1);
-        Carta aux = m.cartas[i];
-        m.cartas[i] = m.cartas[j];
-        m.cartas[j] = aux;
+        int aux = mazo[i];
+        mazo[i] = mazo[j];
+        mazo[j] = aux;
     }
 }
 
-void robarDos(Mazo &m, Carta &a, Carta &b) {
-    a = m.cartas.back();
-    m.cartas.pop_back();
-    b = m.cartas.back();
-    m.cartas.pop_back();
+int robarCarta(int mazo[], int& cantMazo)
+{
+    cantMazo--;
+    return mazo[cantMazo];
 }
 
-void devolverCarta(Mazo &m, Carta c) {
-    m.cartas.push_back(c);
+void devolverCarta(int mazo[], int& cantMazo, int carta)
+{
+    mazo[cantMazo] = carta;
+    cantMazo++;
 }
 
-int cantidadMazo(const Mazo &m) {
-    return (int)m.cartas.size();
-}
+int puntuarFila(int suma, int jugador, int puntajes[])
+{
+    int rival = 1 - jugador;
 
-// ---------- TABLERO ----------
-void inicializarTablero(Tablero &t) {
-    Carta vacia = crearCarta(0, SIN_PALO, false);
-    t.COLUMNAS = std::vector< std::vector<Carta> >(FILAS, std::vector<Carta>(COLUMNAS, vacia));
-    t.ocupado    = std::vector< std::vector<bool> >(FILAS, std::vector<bool>(COLUMNAS, false));
-}
-
-int cartasEnFila(const Tablero &t, int fila) {
-    int n = 0;
-    for (int c = 0; c < COLUMNAS; c++)
-        if (t.ocupado[fila][c]) n++;
-    return n;
-}
-
-int sumaFila(const Tablero &t, int fila) {
-    int suma = 0;
-    for (int c = 0; c < COLUMNAS; c++)
-        if (t.ocupado[fila][c]) suma += t.COLUMNAS[fila][c].valor;
-    return suma;
-}
-
-bool filaCompleta(const Tablero &t, int fila) {
-    return cartasEnFila(t, fila) == COLUMNAS;
-}
-
-bool tableroVacio(const Tablero &t) {
-    for (int f = 0; f < FILAS; f++)
-        if (cartasEnFila(t, f) > 0) return false;
-    return true;
-}
-
-void vaciarFila(Tablero &t, Mazo &m, int fila) {
-    for (int c = 0; c < COLUMNAS; c++) {
-        if (t.ocupado[fila][c]) {
-            devolverCarta(m, t.COLUMNAS[fila][c]);
-            t.ocupado[fila][c] = false;
+    if (suma < CIERRE_EXACTO)
+    {
+        return SIN_PUNTOS;
+    }
+    if (suma == CIERRE_EXACTO)
+    {
+        puntajes[jugador] += CIERRE_EXACTO;
+        puntajes[rival] -= PENALIDAD;
+        if (puntajes[rival] < 0)
+        {
+            puntajes[rival] = 0;
         }
+        return EXACTO;
     }
-}
-
-// ---------- PUNTAJE ----------
-ResultadoFila resolverFila(Tablero &t, Mazo &m, int fila) {
-    ResultadoFila r;
-    r.suma = sumaFila(t, fila);
-    r.deltaCompletador = 0;
-    r.deltaRival = 0;
-
-    if (r.suma < 30) {
-        // nadie suma
-    } else if (r.suma == 30) {
-        r.deltaCompletador = 30;
-        r.deltaRival = -15;
-    } else if (r.suma <= 39) {
-        r.deltaCompletador = r.suma;
-    } else {  // 40 o mas: crisis de los 40
-        r.deltaRival = r.suma;
+    if (suma < LIMITE_CRISIS)
+    {
+        puntajes[jugador] += suma;
+        return COMUN;
     }
-
-    vaciarFila(t, m, fila);
-    return r;
+    puntajes[rival] += suma;     // crisis de los 40: los puntos son para el rival
+    return CRISIS;
 }
 
-void aplicarPuntos(int &puntaje, int delta) {
-    puntaje += delta;
-    if (puntaje < 0) puntaje = 0;
+int ganador(const int puntajes[])
+{
+    if (puntajes[0] >= META)
+    {
+        return 0;
+    }
+    if (puntajes[1] >= META)
+    {
+        return 1;
+    }
+    return -1;
 }
 
-bool hayGanador(int puntaje) {
-    return puntaje >= PUNTOS_VICTORIA;
+void actualizarMejor(const string& nombre, int puntaje,
+                     string& mejorNombre, int& mejorPuntaje)
+{
+    if (puntaje > mejorPuntaje)
+    {
+        mejorPuntaje = puntaje;
+        mejorNombre = nombre;
+    }
 }
