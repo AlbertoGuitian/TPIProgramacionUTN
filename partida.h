@@ -14,8 +14,6 @@ string pedirNombres(string nombres);
 void crearMazo(int mazo, int cantMazo);
 void mezclarMazo(int mazo, int cantMazo);
 void crearTablero(int tablero);
-//hola chicos como estan?
-
 
 
 

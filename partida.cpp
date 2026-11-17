@@ -3,6 +3,8 @@
 #include "mazo.h"
 #include "tablero.h"
 #include "pantallas.h"
+#include <iostream>
+using namespace std;
 
 void jugarPartida(string& mejorNombre, int& mejorPuntaje)
 {
@@ -54,9 +56,43 @@ void jugarTurno(const string nombres[], int puntajes[],
                 int tablero[], int mazo[], int& cantMazo,
                 int activo, int c1, int c2)
 {
+    int cartaElegida, opcionElegida, filaElegida;
     // TODO (C):
     // 3. Mostrar las dos cartas robadas y pedir cual jugar
     //    (un comodin no se puede elegir si el tablero esta vacio).
+    do
+    {
+        cout << "Le toca a: " << nombres[activo] << endl;
+        cout << "1) La carta robada es: " << textoCarta(c1) << " y vale: " << valorCarta(c1) << endl;
+        cout << "2) La carta robada es: " << textoCarta(c2) << " y vale: " << valorCarta(c2) << endl;
+        cout << "Seleccione una carta para jugar (1 o 2): " ;
+
+
+        opcionElegida = leerEntero(1,2);
+
+    if ( opcionElegida ==1)
+        {
+        cartaElegida = c1;
+        }
+
+    else {
+        cartaElegida = c2;
+    }
+    }
+    while(esComodin(cartaElegida) && cartasEnTablero(tablero)==0);
+
+    cout << "Ingrese el numero de fila donde colocar la carta (1-3): ";
+
+    filaElegida = leerEntero(1,3);
+
+
+    colocarCarta(tablero,cartaElegida,filaElegida);
+
+    cout << nombres[activo] << " coloca [ " << textoCarta(opcionElegida) << " ] en la fila " << filaElegida << endl;
+
+
+
+
     // 4. Segun el tipo de carta, pedir los datos y llamar a la jugada de B.
     //    Si la jugada devuelve false, volver a pedir los datos.
     // 5. Con filaCompleta(): si hay una fila, sumaFila -> puntuarFila (A) ->
@@ -65,6 +101,8 @@ void jugarTurno(const string nombres[], int puntajes[],
 
     // PROVISORIO: mientras no este armado el turno, las cartas vuelven al mazo
     // para que el arreglo no se quede sin cartas.
-    devolverCarta(mazo, cantMazo, c1);
-    devolverCarta(mazo, cantMazo, c2);
+    //devolverCarta(mazo, cantMazo, c1);
+    //devolverCarta(mazo, cantMazo, c2);
+
+    //puntajes[activo] = META;   // TEMPORAL
 }
