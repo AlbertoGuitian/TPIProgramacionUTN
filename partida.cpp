@@ -88,15 +88,20 @@ void jugarTurno(const string nombres[], int puntajes[],
 
     colocarCarta(tablero,cartaElegida,filaElegida);
 
-    cout << nombres[activo] << " coloca [ " << textoCarta(opcionElegida) << " ] en la fila " << filaElegida << endl;
-
-
-
+    cout << nombres[activo] << " coloca [ " << textoCarta(cartaElegida) << " ] en la fila " << filaElegida << endl;
 
     // 4. Segun el tipo de carta, pedir los datos y llamar a la jugada de B.
     //    Si la jugada devuelve false, volver a pedir los datos.
-    // 5. Con filaCompleta(): si hay una fila, sumaFila -> puntuarFila (A) ->
+
+
+    // 5. Con filaCompleta(): si hay una fila completa, sumaFila -> puntuarFila (A) ->
     //    mostrar el mensaje segun el resultado -> vaciarFila (B).
+    int sumaParcialFila=0;
+    if (filaCompleta(tablero)!=0){
+       sumaParcialFila = sumaFila(tablero, filaCompleta(tablero));
+        puntuarFila();
+    }
+
     // 6. Devolver al mazo la carta que no se jugo y el comodin si se uso.
 
     // PROVISORIO: mientras no este armado el turno, las cartas vuelven al mazo
