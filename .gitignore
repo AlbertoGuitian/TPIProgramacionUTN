@@ -2,4 +2,5 @@
 CrisisDe40.depend
 CrisisDe40.layout
 *.exe
-bin/
+bin/**/*
+bin/Debug/CrisisDe40.exe
