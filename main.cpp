@@ -5,7 +5,7 @@
 #include "contrato.h"
 #include "pantallas.h"
 #include "partida.h"
-//Hola chicos
+
 
 using namespace std;
 
