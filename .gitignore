@@ -1,3 +1,5 @@
 /CrisisDe40/bin
 CrisisDe40.depend
 CrisisDe40.layout
+*.exe
+bin/
