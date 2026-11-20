@@ -56,7 +56,7 @@ void jugarTurno(const string nombres[], int puntajes[],
                 int tablero[], int mazo[], int& cantMazo,
                 int activo, int c1, int c2)
 {
-    int cartaElegida, opcionElegida, filaElegida;
+    int cartaElegida, opcionElegida, filaElegida, cartaNoElegida;
     // TODO (C):
     // 3. Mostrar las dos cartas robadas y pedir cual jugar
     //    (un comodin no se puede elegir si el tablero esta vacio).
@@ -73,22 +73,37 @@ void jugarTurno(const string nombres[], int puntajes[],
     if ( opcionElegida ==1)
         {
         cartaElegida = c1;
+        cartaNoElegida = c2;
         }
 
     else {
         cartaElegida = c2;
+        cartaNoElegida = c1;
     }
     }
     while(esComodin(cartaElegida) && cartasEnTablero(tablero)==0);
-
-    cout << "Ingrese el numero de fila donde colocar la carta (1-3): ";
-
-    filaElegida = leerEntero(1,3);
-
-
-    colocarCarta(tablero,cartaElegida,filaElegida);
+    // agrego la funcionalidad del diamante.
+//    if (esDiamante(cartaElegida)){
+//        cout << "1) Colocar - 2) Reemplazar " << endl;
+//    }
+//    if (leerEntero(1,2) == 1){
+//        colocarCarta(tablero, cartaElegida,filaElegida);
+//    }
+//    //else{
+//        //reemplazarCarta()
+//    }
+//
+//    cout << "Ingrese el numero de fila donde colocar la carta (1-3): " << endl;
+//
+//    filaElegida = leerEntero(1,3);
+//
+//
+//    colocarCarta(tablero,cartaElegida,filaElegida);
 
     cout << nombres[activo] << " coloca [ " << textoCarta(cartaElegida) << " ] en la fila " << filaElegida << endl;
+
+    // 6. Devolver al mazo la carta que no se jugo y el comodin si se uso.
+    devolverCarta(mazo, cantMazo, cartaNoElegida); // devuelve la carta que no se elegió
 
     // 4. Segun el tipo de carta, pedir los datos y llamar a la jugada de B.
     //    Si la jugada devuelve false, volver a pedir los datos.
@@ -96,18 +111,31 @@ void jugarTurno(const string nombres[], int puntajes[],
 
     // 5. Con filaCompleta(): si hay una fila completa, sumaFila -> puntuarFila (A) ->
     //    mostrar el mensaje segun el resultado -> vaciarFila (B).
-    int sumaParcialFila=0;
-    if (filaCompleta(tablero)!=0){
-       sumaParcialFila = sumaFila(tablero, filaCompleta(tablero));
-        puntuarFila();
+    int sumaParcialFila=0, resultadoFila=0;
+    int filaLlena = filaCompleta(tablero);
+    if (filaLlena !=0 ){
+        sumaParcialFila = sumaFila(tablero, filaLlena);
+        resultadoFila = puntuarFila(sumaParcialFila,activo,puntajes);
+
+
+        if (resultadoFila == EXACTO)
+            {
+            cout << "30 EXACTOS " << nombres[activo] << " suma 30 puntos y " << nombres [!activo] << " pierde: " << PENALIDAD << " puntos :( " << endl;
+            }
+             else if(resultadoFila == COMUN)
+                {
+                cout << nombres[activo] << " suma: " << sumaParcialFila << endl;
+                }
+             else if(resultadoFila == CRISIS)
+                {
+                cout << "CRISIS DE LOS 40!! " << nombres[!activo] << " suma: " << sumaParcialFila << endl;
+                }
+             else
+                {
+                cout << "Resultado fila menor a 30 puntos, nadie suma." << endl;
+                }
+            vaciarFila(tablero,mazo,cantMazo,filaLlena);
     }
 
-    // 6. Devolver al mazo la carta que no se jugo y el comodin si se uso.
 
-    // PROVISORIO: mientras no este armado el turno, las cartas vuelven al mazo
-    // para que el arreglo no se quede sin cartas.
-    //devolverCarta(mazo, cantMazo, c1);
-    //devolverCarta(mazo, cantMazo, c2);
-
-    //puntajes[activo] = META;   // TEMPORAL
 }
