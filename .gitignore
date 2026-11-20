@@ -4,3 +4,4 @@ CrisisDe40.layout
 *.exe
 bin/**/*
 bin/Debug/CrisisDe40.exe
+/bin
