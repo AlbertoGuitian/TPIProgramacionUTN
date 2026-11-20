@@ -5,7 +5,7 @@
 #include "pantallas.h"
 #include <iostream>
 using namespace std;
-
+//HOLIS
 void jugarPartida(string& mejorNombre, int& mejorPuntaje)
 {
     string nombres[2];
@@ -93,12 +93,12 @@ void jugarTurno(const string nombres[], int puntajes[],
 //        //reemplazarCarta()
 //    }
 //
-//    cout << "Ingrese el numero de fila donde colocar la carta (1-3): " << endl;
+    cout << "Ingrese el numero de fila donde colocar la carta (1-3): " << endl;
 //
-//    filaElegida = leerEntero(1,3);
+   filaElegida = leerEntero(1,3);
 //
 //
-//    colocarCarta(tablero,cartaElegida,filaElegida);
+   colocarCarta(tablero,cartaElegida,filaElegida);
 
     cout << nombres[activo] << " coloca [ " << textoCarta(cartaElegida) << " ] en la fila " << filaElegida << endl;
 
